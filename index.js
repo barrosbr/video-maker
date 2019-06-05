@@ -1,10 +1,19 @@
 	const readline = require('readline-sync')
+        const robots = {
+		text: require('./robots/text.js')
+	}
 
-	function start(){
-		const content = {}
+        async function start(){
+		const content = {
+			maximumSentences: 7
+		}
 
-		content.search = askAndReturnSearchTerm()
+		
+
+		content.searchTerm = askAndReturnSearchTerm()
 		content.prefixo = askAndReturnPrefixo()
+
+		await robots.text(content)
 
 		function askAndReturnSearchTerm() {
 			return readline.question ('Digite um termo pra busca: ')
@@ -16,6 +25,6 @@
 
 			return selectPrefixosText
 		}
-		console.log(content)
+		console.log(JSON.stringify(content, null, 4))
 	}
 	start()

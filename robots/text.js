@@ -11,28 +11,29 @@
   url: 'https://gateway.watsonplatform.net/natural-language-understanding/api/'
 })
 
- async function robot(content){
-	 // Verificar se recebei corretamente o contente com os termos de busca
-	// console.log(`Recebi com sucesso o contet:  ${content.searchTerm}`)
+ const state = require('./state.js')
+
+ async function robot() {
+
+ 	 const content = state.load()
+	
 	 await fetchContentFromWikepedia(content)
 	 sanitizeContent(content)
 	 breakContentIntoSentences(content)
 	 limitMaximumSentences(content)
 	 await fetchKeywordsOfAllSentences(content)
 
-	// breakContentIntoSentences(content)
-	// console.log('Verificando se fetchContentFromWikepedia retorna Promise')
-	// console.log(fetchContentFromWikepedia())
-	 
+	 state.save(content)
+
+		 
 	 async function fetchContentFromWikepedia(content){
-		// return 'Resultado da Promise'
+		
 		 const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey)
 		 const wikipediaAlgorithm = algorithmiaAuthenticated.algo('web/WikipediaParser/0.1.2')
 		 const wikipediaResponse = await wikipediaAlgorithm.pipe(content.searchTerm)
 		 const widkipediaContent = wikipediaResponse.get()
 		 content.sourceContentOriginal = widkipediaContent.content
-		// console.log(widkipediaContent)
-
+		
 	 }
 
   function sanitizeContent(content) {

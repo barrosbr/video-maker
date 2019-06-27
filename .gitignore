@@ -59,3 +59,23 @@ typings/
 
 # next.js build output
 .next
+
+# credentials
+credentials/*.json
+
+content.json
+
+content/
+content/*.png
+content/*.jpg
+content/*.js
+content/*.mov
+content/*mkv
+content/*blend
+content/*mp3
+
+Adobe After Effects Auto-Save
+template.aep Logs
+.DS_Store
+
+bkp-video-maker/

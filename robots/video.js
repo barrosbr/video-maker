@@ -82,7 +82,7 @@ async function robot() {
           gravity: 'center'
         },
         1: {
-          size: '1800x1080',
+          size: '800x1080',
           gravity: 'center'
         },
         2: {
